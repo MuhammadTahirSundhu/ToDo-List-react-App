@@ -6,7 +6,6 @@ import Todo from "./components/Todo";
 function App() {
   return (
     <>
-    
     <div><Navbar title="ToDo List"/></div>
     <AddToDo />
     </>
