@@ -1,34 +1,47 @@
 import React from "react";
 import MainTitle from "./MainTitle";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Todo from "./Todo";
 
 export default function AddToDo() {
+  const [taskTitle, setTaskTitle] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
+  const [allToDo, setallToDo] = useState([]);
 
-  const [taskTitle,setTaskTitle] = useState("");
-  const [taskDescription,setTaskDescription] = useState("");
-  const [allToDo,setallToDo] = useState([]);
-
-  function taskTitleHandle(event){
+  function taskTitleHandle(event) {
     setTaskTitle(event.target.value);
   }
 
-  function taskDescriptionHandle(event){
+  function taskDescriptionHandle(event) {
     setTaskDescription(event.target.value);
   }
 
-  function addToDo(event){
+  function addToDo(event) {
     const newTask = {
-      title:taskTitle,
-      description:taskDescription
-    }
+      title: taskTitle,
+      description: taskDescription,
+    };
 
-    setallToDo([...allToDo,newTask]);
+    // the below will save the data in localStorage every time alltodo array will change
+    setallToDo((prevToDos) => {
+      const updatedToDos = [...prevToDos, newTask];
+      localStorage.setItem("allToDo", JSON.stringify(updatedToDos));
+      return updatedToDos;
+    });
+
     setTaskTitle("");
     setTaskDescription("");
-    <Todo allToDo={allToDo}/>
   }
- 
+
+  // the below code means that every time the page will refresh it will check initally that 'allToDo' key name data is stored or not on local storage.
+  useEffect(() => {
+    let storedData = localStorage.getItem("allToDo");
+    if (storedData) {
+      setallToDo(JSON.parse(storedData));
+      console.log(allToDo);
+      console.log("Data get from Local Storage");
+    }
+  }, []);
 
   return (
     <>
@@ -68,6 +81,7 @@ export default function AddToDo() {
           </button>
         </div>
       </div>
+      <div>{allToDo.length > 0 && <Todo allToDo={allToDo} />}</div>
     </>
   );
 }
