@@ -45,10 +45,10 @@ export default function AddToDo() {
 
   return (
     <>
-      <div>
-        <MainTitle title="Enter ToDo Details" />
-      </div>
       <div className="container my-5">
+        <div>
+          <MainTitle title="Enter ToDo Details" />
+        </div>
         <div className="mb-3">
           <label htmlFor="exampleFormControlInput1" className="form-label">
             Title
