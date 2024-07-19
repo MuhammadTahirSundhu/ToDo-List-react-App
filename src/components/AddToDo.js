@@ -45,42 +45,7 @@ export default function AddToDo() {
 
   return (
     <>
-      <div>
-        <MainTitle title="Enter ToDo Details" />
-      </div>
-      <div className="container">
-        <div className="mb-3 my-5">
-          <label htmlFor="exampleFormControlInput1" className="form-label">
-            Title
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="exampleFormControlInput1"
-            placeholder="Task# 01"
-            value={taskTitle}
-            onChange={taskTitleHandle}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="exampleFormControlTextarea1" className="form-label">
-            Description
-          </label>
-          <textarea
-            className="form-control"
-            id="exampleFormControlTextarea1"
-            rows="3"
-            placeholder="This task is for ....."
-            value={taskDescription}
-            onChange={taskDescriptionHandle}
-          ></textarea>
-        </div>
-        <div>
-          <button type="button" className="btn btn-primary" onClick={addToDo}>
-            Add To List
-          </button>
-        </div>
-      </div>
+      <div><MainTitle title="Enter ToDo Details" /></div>
       <div>{allToDo.length > 0 && <Todo allToDo={allToDo} />}</div>
     </>
   );
