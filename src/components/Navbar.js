@@ -1,19 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
+
+  const textColor = props.Theme === 'dark' ? 'white' : 'black'; 
+
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-light">
+      <nav className={`navbar navbar-expand-lg bg-${props.Theme}`} style={{ color: textColor }}>
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/addTodo">
+          <Link className="navbar-brand" to="/addTodo" style={{ color: textColor }}>
             {props.title}
           </Link>
           <button
@@ -30,7 +27,11 @@ export default function Navbar(props) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="/Home">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/Home"
+                >
                   Home
                 </Link>
               </li>
@@ -82,9 +83,20 @@ export default function Navbar(props) {
                 type="checkbox"
                 role="switch"
                 id="flexSwitchCheckDefault"
-              />
-              <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
-                Dark Mode  
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    props.setTheme('dark');
+                    console.log("Theme set to dark");
+                  } else {
+                    props.setTheme('light');
+                    console.log("Theme set to light");
+                  }
+                }}              />
+              <label
+                className="form-check-label"
+                htmlFor="flexSwitchCheckDefault"
+              >
+                Dark Mode
               </label>
             </div>
             <form className="d-flex" role="search">

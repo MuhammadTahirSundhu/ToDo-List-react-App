@@ -12,6 +12,7 @@ import About from "./components/About";
 function App() {
   const [alert, setAlert] = useState({ message: "", type: "" });
   const [allToDo, setallToDo] = useState([]);
+  const [Theme,setTheme] = useState('light');
 
   const showAlert = (message, type) => {
     const newAlert = {
@@ -24,29 +25,31 @@ function App() {
     }, 2000);
   };
 
-    // the below code means that every time the page will refresh it will check initally that 'allToDo' key name data is stored or not on local storage.
-    useEffect(() => {
-      let storedData = localStorage.getItem("allToDo");
-      if (storedData) {
-        setallToDo(JSON.parse(storedData));
-        showAlert("Previous tasks load from local storage","primary");
-      }
-    }, []);
+  useEffect(() => {
+    let storedData = localStorage.getItem("allToDo");
+    if (storedData) {
+      setallToDo(JSON.parse(storedData));
+      showAlert("Previous tasks load from local storage", "primary");
+    }
+  }, []);
 
-  return (
+  useEffect(()=>{
+    document.body.style.backgroundColor = Theme === 'dark' ? 'black' : 'white';
+  },[Theme]);
+
+  return ( 
     <>
-    <Router>
-          <div><Navbar title="ToDo List" /></div>
-          <Alert type={alert.type} message={alert.message} />
-         <Routes>
-
-          <Route path="/Home" element={<Home/>} />
-          <Route path="/about" element={<About/>} />
-          <Route path="/addTodo" element={<AddToDo showAlert={showAlert} setallToDo={setallToDo} />} />
-          <Route path="/myTodos" element={allToDo.length > 0 && <Todo allToDo={allToDo} />} />
-
-         </Routes>
-    </Router>
+    {/* {localStorage.clear()} */}
+      <Router>
+        <div><Navbar title="ToDo List" setTheme={setTheme} Theme={Theme} /></div>
+        <Alert type={alert.type} message={alert.message} />
+        <Routes>
+          <Route path="/Home" element={<Home Theme={Theme} />} />
+          <Route path="/about" element={<About Theme={Theme}/>} />
+          <Route path="/addTodo" element={<AddToDo showAlert={showAlert} setallToDo={setallToDo} Theme={Theme} />} />
+          <Route path="/myTodos" element={allToDo.length > 0 && <Todo allToDo={allToDo} Theme={Theme} />} />
+        </Routes>
+      </Router>
     </>
   );
 }

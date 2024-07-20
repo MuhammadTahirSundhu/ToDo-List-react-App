@@ -1,12 +1,14 @@
-import React from 'react'
-import MainTitle from './MainTitle'
+import React from "react";
+import MainTitle from "./MainTitle";
 
-function About() {
+function About(props) {
+    const textColor = props.Theme === 'dark' ? 'white' : 'black'; 
+
   return (
-    <div>
-        <MainTitle title="About Us"/>
+    <div  style={{color:textColor}}>
+      <MainTitle title="About Us" />
     </div>
-  )
+  );
 }
 
-export default About
+export default About;

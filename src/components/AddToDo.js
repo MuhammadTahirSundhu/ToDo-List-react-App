@@ -1,8 +1,9 @@
 import React from "react";
 import MainTitle from "./MainTitle";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function AddToDo(props) {
+  const textColor = props.Theme === 'dark' ? 'white' : 'black'; 
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
 
@@ -29,13 +30,12 @@ export default function AddToDo(props) {
 
     setTaskTitle("");
     setTaskDescription("");
-    props.showAlert("Task Added","success");
-    
+    props.showAlert("Task Added", "success");
   }
 
   return (
     <>
-      <div className="container my-5">
+      <div className="container my-5"style={{color:textColor}}>
         <div>
           <MainTitle title="Enter ToDo Details" />
         </div>
