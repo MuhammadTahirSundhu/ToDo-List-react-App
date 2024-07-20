@@ -1,14 +1,21 @@
-import React from 'react'
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
 
 export default function Navbar(props) {
   return (
     <div>
-         <nav className="navbar navbar-expand-lg bg-light">
+      <nav className="navbar navbar-expand-lg bg-light">
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
+          <Link className="navbar-brand" to="/addTodo">
             {props.title}
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -23,57 +30,63 @@ export default function Navbar(props) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="/">
+                <Link className="nav-link active" aria-current="page" to="/Home">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/">
+                <Link className="nav-link" to="/about">
                   About
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/">
+                <Link className="nav-link" to="/Home">
                   Contact
-                </a>
+                </Link>
               </li>
               <li className="nav-item dropdown">
-                <a
+                <Link
                   className="nav-link dropdown-toggle"
-                  href="/"
+                  to="/Home"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Resources
-                </a>
+                </Link>
                 <ul className="dropdown-menu">
                   <li>
-                    <a className="dropdown-item" href="/">
+                    <Link className="dropdown-item" to="/addTodo">
                       Add ToDo
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="/">
+                    <Link className="dropdown-item" to="/Home">
                       Delete ToDo
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a className="dropdown-item" href="/">
+                    <Link className="dropdown-item" to="/myTodos">
                       My ToDo's
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>
-              <li className="nav-item">
-                <a className="nav-link disabled" href="/">
-                  Dark Mode
-                </a>
-              </li>
             </ul>
+            <div className="form-check form-switch">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckDefault"
+              />
+              <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
+                Dark Mode  
+              </label>
+            </div>
             <form className="d-flex" role="search">
               <input
                 className="form-control me-2"
@@ -89,11 +102,10 @@ export default function Navbar(props) {
         </div>
       </nav>
     </div>
-  )
+  );
 }
 
 // this means that the title should be of string type
-Navbar.propTypes = {title: PropTypes.string}
+Navbar.propTypes = { title: PropTypes.string };
 // This means that no value will pass to componennt from the calling location this value is set to title by default
 // Navbar.defaultProps ={title: "Enter You Navabr Title here!"}
-

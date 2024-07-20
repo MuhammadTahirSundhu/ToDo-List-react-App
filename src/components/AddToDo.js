@@ -1,12 +1,10 @@
 import React from "react";
 import MainTitle from "./MainTitle";
 import { useState, useEffect } from "react";
-import Todo from "./Todo";
 
-export default function AddToDo() {
+export default function AddToDo(props) {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
-  const [allToDo, setallToDo] = useState([]);
 
   function taskTitleHandle(event) {
     setTaskTitle(event.target.value);
@@ -23,7 +21,7 @@ export default function AddToDo() {
     };
 
     // the below will save the data in localStorage every time alltodo array will change
-    setallToDo((prevToDos) => {
+    props.setallToDo((prevToDos) => {
       const updatedToDos = [...prevToDos, newTask];
       localStorage.setItem("allToDo", JSON.stringify(updatedToDos));
       return updatedToDos;
@@ -31,17 +29,9 @@ export default function AddToDo() {
 
     setTaskTitle("");
     setTaskDescription("");
+    props.showAlert("Task Added","success");
+    
   }
-
-  // the below code means that every time the page will refresh it will check initally that 'allToDo' key name data is stored or not on local storage.
-  useEffect(() => {
-    let storedData = localStorage.getItem("allToDo");
-    if (storedData) {
-      setallToDo(JSON.parse(storedData));
-      console.log(allToDo);
-      console.log("Data get from Local Storage");
-    }
-  }, []);
 
   return (
     <>
@@ -81,7 +71,6 @@ export default function AddToDo() {
           </button>
         </div>
       </div>
-      <div>{allToDo.length > 0 && <Todo allToDo={allToDo} />}</div>
     </>
   );
 }
