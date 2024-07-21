@@ -10,7 +10,7 @@ export default function Navbar(props) {
     <div>
       <nav className={`navbar navbar-expand-lg bg-${props.Theme}`} style={{ color: textColor }}>
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/addTodo" style={{ color: textColor }}>
+          <Link className="navbar-brand" to="/Home" style={{ color: textColor }}>
             {props.title}
           </Link>
           <button
@@ -41,7 +41,7 @@ export default function Navbar(props) {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/Home">
+                <Link className="nav-link" to="/Contact">
                   Contact
                 </Link>
               </li>

@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 import Home from "./components/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import About from "./components/About";
+import Contact from "./components/Contact";
 
 function App() {
   const [alert, setAlert] = useState({ message: "", type: "" });
@@ -46,6 +47,7 @@ function App() {
         <Routes>
           <Route path="/Home" element={<Home Theme={Theme} />} />
           <Route path="/about" element={<About Theme={Theme}/>} />
+          <Route path="/Contact" element={<Contact Theme={Theme}/>} />
           <Route path="/addTodo" element={<AddToDo showAlert={showAlert} setallToDo={setallToDo} Theme={Theme} />} />
           <Route path="/myTodos" element={allToDo.length > 0 && <Todo allToDo={allToDo} Theme={Theme} />} />
         </Routes>
