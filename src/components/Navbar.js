@@ -10,7 +10,7 @@ export default function Navbar(props) {
     <div>
       <nav className={`navbar navbar-expand-lg bg-${props.Theme}`} style={{ color: textColor }}>
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/Home" style={{ color: textColor }}>
+          <Link className="navbar-brand" to="/" style={{ color: textColor }}>
             {props.title}
           </Link>
           <button
@@ -30,39 +30,42 @@ export default function Navbar(props) {
                 <Link
                   className="nav-link active"
                   aria-current="page"
-                  to="/Home"
+                  to="/"
+                  onClick={()=>{props.setdeleteFlag(0)}}
+                  style={{ color: textColor }}
                 >
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/about">
+                <Link className="nav-link" to="/about" onClick={()=>{props.setdeleteFlag(0)}} style={{ color: textColor }}>
                   About
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/Contact">
+                <Link className="nav-link" to="/Contact"onClick={()=>{props.setdeleteFlag(0)}} style={{ color: textColor }}>
                   Contact
                 </Link>
               </li>
               <li className="nav-item dropdown">
                 <Link
                   className="nav-link dropdown-toggle"
-                  to="/Home"
+                  to="/"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
+                  style={{ color: textColor }}
                 >
                   Resources
                 </Link>
-                <ul className="dropdown-menu">
+                <ul className="dropdown-menu" >
                   <li>
-                    <Link className="dropdown-item" to="/addTodo">
+                    <Link className="dropdown-item" to="/addTodo" onClick={()=>{props.setdeleteFlag(0)}}>
                       Add ToDo
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/Home">
+                    <Link className="dropdown-item" to="/myTodos"onClick={()=>{props.setdeleteFlag(1)}}>
                       Delete ToDo
                     </Link>
                   </li>
@@ -70,7 +73,7 @@ export default function Navbar(props) {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/myTodos">
+                    <Link className="dropdown-item" to="/myTodos" onClick={()=>{props.setdeleteFlag(0)}}>
                       My ToDo's
                     </Link>
                   </li>
