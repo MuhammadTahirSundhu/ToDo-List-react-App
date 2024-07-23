@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import MainTitle from "./MainTitle";
+import MainTitle from "../components/MainTitle";
 import introImage from "../Assets/intro.jpg";
 import img1 from "../Assets/qq.jpeg";
 import img2 from "../Assets/ww.jpeg";
 import { Link } from "react-router-dom";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 function Home(props) {
   const textColor = props.Theme === "dark" ? "white" : "black";
   const imgBgColor = props.Theme === "dark" ? "black" : "white";

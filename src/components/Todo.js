@@ -1,10 +1,14 @@
 import React from "react";
 import MainTitle from "./MainTitle";
 import Footer from "./Footer";
-
+import UseFetchTodos from "./UseFetchTodos";
 export default function Todo(props) {
   const textColor = props.Theme === 'dark' ? 'white' : 'black'; 
   const bgColor =  props.Theme === 'dark' ? 'grey' : '#9ebeee'; 
+  
+  const OurToDos = UseFetchTodos();
+  console.log(OurToDos);
+
   if ( props.allToDo.length <= 0) {
     alert("No Todo Task Exsist!!!!!!!");
     return null;

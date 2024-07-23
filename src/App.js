@@ -5,10 +5,11 @@ import Alert from "./components/Alert";
 import Navbar from "./components/Navbar";
 import Todo from "./components/Todo";
 import React, { useEffect, useState } from "react";
-import Home from "./components/Home";
+import Home from "./Pages/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import About from "./components/About";
-import Contact from "./components/Contact";
+import About from "./Pages/About";
+import Contact from "./Pages/Contact";
+import UseFetchTodos from "./components/UseFetchTodos";
 
 function App() {
   const [alert, setAlert] = useState({ message: "", type: "" });
