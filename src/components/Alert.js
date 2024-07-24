@@ -1,7 +1,8 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import { themeContext } from "..";
 export default function Alert(props) {
-  const textColor = props.Theme === 'dark' ? 'white' : 'black'; 
+  const [Theme,setTheme] = useContext(themeContext);
+  const textColor = Theme === 'dark' ? 'white' : 'black'; 
 
   if (props.message === "") return;
   return (

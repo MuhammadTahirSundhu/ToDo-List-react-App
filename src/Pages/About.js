@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import MainTitle from "../components/MainTitle";
 import Footer from "../components/Footer";
 import img1 from "../Assets/fast.jpg";
 import img2 from "../Assets/services.jpg";
 import img3 from "../Assets/best.jpg";
-
+import { themeContext } from "..";
 function About(props) {
-  const textColor = props.Theme === "dark" ? "white" : "black";
+  const [Theme,setTheme] = useContext(themeContext);
+  const textColor = Theme === "dark" ? "white" : "black";
   const imageStyle = {
     height: "400px", // Set a fixed height
     objectFit: "cover", // Ensure the image covers the container without stretching
@@ -130,7 +131,7 @@ function About(props) {
           </button>
         </div>
       </div>
-      <Footer Theme={props.Theme} />
+      <Footer Theme={Theme} />
     </>
   );
 }

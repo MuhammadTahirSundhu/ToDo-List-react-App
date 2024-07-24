@@ -1,13 +1,42 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { useState, createContext } from "react";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+export const themeContext = createContext();
+export const deleteToDoContext = createContext();
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+const ThemeProvider = ({ children }) => {
+  const [Theme, setTheme] = useState("light");
+  console.log("ThemeContext used!");
+  return (
+    <themeContext.Provider value={[Theme, setTheme]}>
+      {children}
+    </themeContext.Provider>
+  );
+};
+
+const DeleteProvider = ({ children }) => {
+  const [deleteFlag, setdeleteFlag] = useState(0);
+  console.log("deleteContext used!");
+
+  return (
+    <deleteToDoContext.Provider value={[deleteFlag, setdeleteFlag]}>
+      {children}
+    </deleteToDoContext.Provider>
+  );
+};
+
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider>
+      <DeleteProvider>
+        <App />
+      </DeleteProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
 

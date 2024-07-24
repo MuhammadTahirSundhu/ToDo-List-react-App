@@ -1,13 +1,14 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import { themeContext } from "..";
 export default function Footer(props) {
-  const textColor = props.Theme === "dark" ? "white" : "black";
+  const [Theme,setTheme] = useContext(themeContext);
+  const textColor = Theme === "dark" ? "white" : "black";
   
   return (
     <div>
       <footer className="bg-body-tertiary text-center text-lg-start">
         <div
-          className={`text-center p-3 bg-${props.Theme}`}
+          className={`text-center p-3 bg-${Theme}`}
           style={{ color: textColor }}
         >
           <p>&copy;Copyright. All rights are reserved. </p>

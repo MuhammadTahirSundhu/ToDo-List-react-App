@@ -1,13 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import MainTitle from "../components/MainTitle";
 import introImage from "../Assets/intro.jpg";
 import img1 from "../Assets/qq.jpeg";
 import img2 from "../Assets/ww.jpeg";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
+import { themeContext } from "..";
+
+import { deleteToDoContext } from "..";
 function Home(props) {
-  const textColor = props.Theme === "dark" ? "white" : "black";
-  const imgBgColor = props.Theme === "dark" ? "black" : "white";
+  
+  const [deleteFlag,setdeleteFlag] = useContext(deleteToDoContext);
+  const [Theme,setTheme] = useContext(themeContext);
+  
+  const textColor = Theme === "dark" ? "white" : "black";
+  const imgBgColor = Theme === "dark" ? "black" : "white";
 
   useEffect(() => {
     // Dynamically add Google Font link
@@ -147,7 +154,7 @@ function Home(props) {
               className="card-img"
               alt="..."
               onClick={() => {
-                props.setdeleteFlag(0);
+                setdeleteFlag(0);
                 console.log("hlo");
               }}
               style={{ objectFit: "cover", width: "100%", height: "100%" }}
@@ -185,7 +192,7 @@ function Home(props) {
               className="card-img"
               alt="..."
               onClick={() => {
-                props.setdeleteFlag(1);
+                setdeleteFlag(1);
                 console.log("hlo");
               }}
               style={{ objectFit: "cover", width: "100%", height: "100%" }}
@@ -208,7 +215,7 @@ function Home(props) {
           </div>
         </Link>
       </div>
-      <Footer Theme={props.Theme} />
+      <Footer Theme={Theme} />
     </>
   );
 }

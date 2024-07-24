@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import MainTitle from "../components/MainTitle";
 import Footer from "../components/Footer";
-
+import { themeContext } from "..";
 function Contact(props) {
-  const textColor = props.Theme === "dark" ? "white" : "black";
+
+  const [Theme,setTheme] = useContext(themeContext);
+  const textColor = Theme === "dark" ? "white" : "black";
 
   return (
     <>
@@ -84,7 +86,7 @@ function Contact(props) {
           </div>
         </div>
       </div>
-      <Footer Theme={props.Theme} />
+      <Footer Theme={Theme} />
     </>
   );
 }

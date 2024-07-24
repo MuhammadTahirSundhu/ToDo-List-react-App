@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import MainTitle from "./MainTitle";
 import Footer from "./Footer";
 import UseFetchTodos from "./UseFetchTodos";
+import { themeContext } from "..";
+import { deleteToDoContext } from "..";
+
 export default function Todo(props) {
-  const textColor = props.Theme === 'dark' ? 'white' : 'black'; 
-  const bgColor =  props.Theme === 'dark' ? 'grey' : '#9ebeee'; 
+  const [deleteFlag,setdeleteFlag] = useContext(deleteToDoContext);
+  const [Theme,setTheme] = useContext(themeContext);
+  const textColor = Theme === 'dark' ? 'white' : 'black'; 
+  const bgColor =  Theme === 'dark' ? 'grey' : '#9ebeee'; 
   
-  const OurToDos = UseFetchTodos();
+  let [OurToDos,setOurTodos] = UseFetchTodos();
   console.log(OurToDos);
 
-  if ( props.allToDo.length <= 0) {
-    alert("No Todo Task Exsist!!!!!!!");
+  if ( OurToDos.length <= 0) {
     return null;
   }
 
-  if(props.deleteFlag)
+  if(deleteFlag)
     {
       function deleteTodo(title){
         setTimeout(() => {
-          let newArr = props.allToDo.filter(todo=> todo.title !== title);
+          let newArr = OurToDos.filter(todo=> todo.title !== title);
           props.setallToDo(newArr);
+          setOurTodos(newArr);
           localStorage.setItem("allToDo", JSON.stringify(newArr));
         }, 0);
       }
@@ -31,7 +36,7 @@ export default function Todo(props) {
           <div >
             <div className="container my-5" >
               <div className="row row-cols-1 row-cols-md-3 g-4" >
-                {props.allToDo.map((todo, index) => (  // Map always want a return in each iteration which makes sure by the arow function "() implicit" and "{} explicit".
+                {OurToDos.map((todo, index) => (  // Map always want a return in each iteration which makes sure by the arow function "() implicit" and "{} explicit".
                   <div className="col" key={index}>
                     <div className="card h-100">
                       <div className="card-body" style={{backgroundColor:bgColor , color:textColor}}>
@@ -50,7 +55,7 @@ export default function Todo(props) {
               </div>
             </div>
           </div>
-          <Footer Theme={props.Theme} />
+          <Footer Theme={Theme} />
         </>
       );
     }
@@ -63,7 +68,7 @@ export default function Todo(props) {
             <div >
               <div className="container my-5" >
                 <div className="row row-cols-1 row-cols-md-3 g-4" >
-                  {props.allToDo.map((todo, index) => (  // Map always want a return in each iteration which makes sure by the arow function "() implicit" and "{} explicit".
+                  {OurToDos.map((todo, index) => (  // Map always want a return in each iteration which makes sure by the arow function "() implicit" and "{} explicit".
                     <div className="col" key={index}>
                       <div className="card h-100">
                         <div className="card-body" style={{backgroundColor:bgColor , color:textColor}}>
@@ -81,7 +86,7 @@ export default function Todo(props) {
                 </div>
               </div>
             </div>
-            <Footer Theme={props.Theme} />
+            <Footer Theme={Theme} />
           </>
         );
     }

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import MainTitle from "./MainTitle";
 import { useState } from "react";
 import Footer from "./Footer";
+import { themeContext } from "..";
 
 export default function AddToDo(props) {
-  const textColor = props.Theme === 'dark' ? 'white' : 'black'; 
+  const [Theme,setTheme] = useContext(themeContext);
+  const textColor = Theme === 'dark' ? 'white' : 'black'; 
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
 
@@ -72,7 +74,7 @@ export default function AddToDo(props) {
           </button>
         </div>
       </div>
-      <Footer Theme={props.Theme} />
+      <Footer Theme={Theme} />
 
     </>
   );

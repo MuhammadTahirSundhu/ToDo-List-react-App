@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-
+import { themeContext } from "..";
+import { deleteToDoContext } from "..";
 export default function Navbar(props) {
-
-  const textColor = props.Theme === 'dark' ? 'white' : 'black'; 
+  
+  const [deleteFlag,setdeleteFlag] = useContext(deleteToDoContext);
+  const [Theme,setTheme] = useContext(themeContext);
+  const textColor = Theme === 'dark' ? 'white' : 'black'; 
 
   return (
     <div>
-      <nav className={`navbar navbar-expand-lg bg-${props.Theme}`} style={{ color: textColor }}>
+      <nav className={`navbar navbar-expand-lg bg-${Theme}`} style={{ color: textColor }}>
         <div className="container-fluid">
           <Link className="navbar-brand" to="/" style={{ color: textColor }}>
             {props.title}
@@ -31,19 +34,19 @@ export default function Navbar(props) {
                   className="nav-link active"
                   aria-current="page"
                   to="/"
-                  onClick={()=>{props.setdeleteFlag(0)}}
+                  onClick={()=>{setdeleteFlag(0)}}
                   style={{ color: textColor }}
                 >
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/about" onClick={()=>{props.setdeleteFlag(0)}} style={{ color: textColor }}>
+                <Link className="nav-link" to="/about" onClick={()=>{setdeleteFlag(0)}} style={{ color: textColor }}>
                   About
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/Contact"onClick={()=>{props.setdeleteFlag(0)}} style={{ color: textColor }}>
+                <Link className="nav-link" to="/Contact"onClick={()=>{setdeleteFlag(0)}} style={{ color: textColor }}>
                   Contact
                 </Link>
               </li>
@@ -60,12 +63,12 @@ export default function Navbar(props) {
                 </Link>
                 <ul className="dropdown-menu" >
                   <li>
-                    <Link className="dropdown-item" to="/addTodo" onClick={()=>{props.setdeleteFlag(0)}}>
+                    <Link className="dropdown-item" to="/addTodo" onClick={()=>{setdeleteFlag(0)}}>
                       Add ToDo
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/myTodos"onClick={()=>{props.setdeleteFlag(1)}}>
+                    <Link className="dropdown-item" to="/myTodos"onClick={()=>{setdeleteFlag(1)}}>
                       Delete ToDo
                     </Link>
                   </li>
@@ -73,7 +76,7 @@ export default function Navbar(props) {
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <Link className="dropdown-item" to="/myTodos" onClick={()=>{props.setdeleteFlag(0)}}>
+                    <Link className="dropdown-item" to="/myTodos" onClick={()=>{setdeleteFlag(0)}}>
                       My ToDo's
                     </Link>
                   </li>
@@ -88,10 +91,10 @@ export default function Navbar(props) {
                 id="flexSwitchCheckDefault"
                 onChange={(e) => {
                   if (e.target.checked) {
-                    props.setTheme('dark');
+                    setTheme('dark');
                     console.log("Theme set to dark");
                   } else {
-                    props.setTheme('light');
+                    setTheme('light');
                     console.log("Theme set to light");
                   }
                 }}              />
